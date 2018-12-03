@@ -1,7 +1,5 @@
 # voucher-storage-service
-microservice developed during "Kyma meets CCV2 Hackathon" at SAP Poland
-
-this app is a small part of a bigger solution developed during the hackathon
+A microservice developed during "Kyma meets CCV2 Hackathon" at SAP Poland. It is responsible for providing and using promotional vouchers. This app is a small part of a bigger solution developed by the whole team during the hackathon.
 
 ## building and running
 
