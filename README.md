@@ -3,10 +3,10 @@ A microservice developed during "Kyma meets CCV2 Hackathon" at SAP in Gliwice, P
 
 ## building and running
 
-- building: `./gradlew clean build`
-- running: `java -jar build/libs/app-1.0-all.jar`
-- building docker container: `./dockerw.sh -b`
-- running docker container: `./dockerw.sh -r`
+- building app: `./gradlew clean build`
+- running app: `java -jar build/libs/app-1.0-all.jar`
+- building docker container with app: `./dockerw.sh -b`
+- running docker container with app: `./dockerw.sh -r`
 
 ## rest api
 
