@@ -20,14 +20,16 @@ class DefaultVoucherService : VoucherService {
   }
 
   override fun loadVouchers() {
-    GlobalScope.async {
-      loadVouchers("9999-CLICK10.csv", Group.CLICK10)
-      loadVouchers("9999-CLICK15.csv", Group.CLICK15)
-      loadVouchers("9999-CLICK20.csv", Group.CLICK20)
-    }
+    GlobalScope.async { loadVouchersFromAllGroups() }
   }
 
-  private fun loadVouchers(fileName: String, group: Group) {
+  private fun loadVouchersFromAllGroups() {
+    loadVouchersFromGroup("9999-CLICK10.csv", Group.CLICK10)
+    loadVouchersFromGroup("9999-CLICK15.csv", Group.CLICK15)
+    loadVouchersFromGroup("9999-CLICK20.csv", Group.CLICK20)
+  }
+
+  private fun loadVouchersFromGroup(fileName: String, group: Group) {
     val (fileSystem, path) = getPathAndFileSystem(fileName)
     Files.lines(path).forEach { vouchers.add(Voucher(group, sanitizeCode(it))) }
     fileSystem?.close()

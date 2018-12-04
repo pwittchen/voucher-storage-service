@@ -17,6 +17,7 @@ GET localhost:7000/voucher           # gets all available vouchers
 GET localhost:7000/voucher/click10   # gets and deactivates voucher for 10% discount
 GET localhost:7000/voucher/click15   # gets and deactivates voucher for 15% discount
 GET localhost:7000/voucher/click20   # gets and deactivates voucher for 20% discount
+GET localhost:7000/health            # gets information about health check
 ```
 
 ## docker hub
