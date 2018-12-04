@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory
 
 class Application {
   companion object {
-    private val logger = LoggerFactory.getLogger(Application.javaClass)
+    private val logger = LoggerFactory.getLogger(Application::class.java)
     private val component = DaggerApplicationComponent.create()
 
     @JvmStatic

@@ -4,11 +4,13 @@ import com.sap.voucher.storage.service.model.Group
 import com.sap.voucher.storage.service.model.Voucher
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.lang.IllegalArgumentException
 import java.net.URI
 import java.nio.file.FileSystem
 import java.nio.file.FileSystems
 import java.nio.file.Files
 import java.nio.file.Path
+import java.nio.file.Paths
 import java.util.HashMap
 
 class DefaultVoucherService : VoucherService {
@@ -27,21 +29,42 @@ class DefaultVoucherService : VoucherService {
   }
 
   private fun loadVouchers(fileName: String, group: Group) {
-    val (fileSystem, path) = getJarAwarePathAndFileSystem(fileName)
+    val (fileSystem, path) = getPathAndFileSystem(fileName)
     Files.lines(path).forEach { vouchers.add(Voucher(group, sanitizeCode(it))) }
-    fileSystem.close()
+    fileSystem?.close()
   }
 
-  private fun getJarAwarePathAndFileSystem(fileName: String): Pair<FileSystem, Path> {
+  private fun getPathAndFileSystem(fileName: String): Pair<FileSystem?, Path?> {
+    var fileSystem: FileSystem? = null
+    var path: Path?
+
+    try {
+      val pair = loadPathInJar(fileName)
+      fileSystem = pair.first
+      path = pair.second
+    } catch (e: IllegalArgumentException) {
+      path = loadPathInApp(fileName)
+    }
+
+    return Pair(fileSystem, path)
+  }
+
+  private fun loadPathInJar(fileName: String): Pair<FileSystem?, Path?> {
+    val fileSystem: FileSystem?
+    val path: Path?
     val uri = ClassLoader.getSystemResource(fileName).toURI()
     val env = HashMap<String, String>()
     val array = uri.toString().split("!")
-    val fs = FileSystems.newFileSystem(URI.create(array[0]), env)
-    val path = fs.getPath(array[1])
-    return Pair(fs, path)
+    fileSystem = FileSystems.newFileSystem(URI.create(array[0]), env)
+    path = fileSystem.getPath(array[1])
+    return Pair(fileSystem, path)
   }
 
-  private fun sanitizeCode(it: String) = it.replace("[\uFEFF-\uFFFF]", "").trim()
+  private fun loadPathInApp(fileName: String): Path? {
+    return Paths.get(ClassLoader.getSystemResource(fileName).toURI())
+  }
+
+  fun sanitizeCode(it: String) = it.replace("[\uFEFF-\uFFFF]", "").trim()
 
   override fun getAll(): List<Voucher> {
     return vouchers
