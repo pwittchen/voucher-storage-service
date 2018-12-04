@@ -4,6 +4,7 @@ import com.sap.voucher.storage.service.configuration.DaggerApplicationComponent
 import io.javalin.Javalin
 import io.javalin.JavalinEvent
 import io.javalin.apibuilder.ApiBuilder.get
+import org.eclipse.jetty.http.HttpStatus
 import org.slf4j.LoggerFactory
 
 class Application {
@@ -27,12 +28,16 @@ class Application {
           }.routes {
             get("/voucher") { it.json(component.voucherController().getAll()) }
             get("/voucher/:group") {
-              val voucher = component.voucherController().getGroup(it.pathParam("group"))
-              if (voucher == null) it.status(200)
-              else it.json(voucher)
+              try {
+                val voucher = component.voucherController().getGroup(it.pathParam("group"))
+                if (voucher == null) it.status(HttpStatus.NO_CONTENT_204)
+                else it.json(voucher).status(HttpStatus.OK_200)
+              } catch (e: IllegalArgumentException) {
+                it.status(HttpStatus.NO_CONTENT_204)
+              }
             }
-            get("/health") { it.result("UP") }
-            get("/") { it.status(403) }
+            get("/health") { it.result("UP").status(HttpStatus.OK_200) }
+            get("/") { it.status(HttpStatus.FORBIDDEN_403) }
           }
           .event(JavalinEvent.SERVER_STARTING) { component.voucherController().loadVouchers() }
           .start(7000)

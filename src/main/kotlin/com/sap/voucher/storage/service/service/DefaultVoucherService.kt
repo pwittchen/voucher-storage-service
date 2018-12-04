@@ -75,7 +75,11 @@ class DefaultVoucherService : VoucherService {
     return vouchers
         .filter { it.active }
         .firstOrNull { it.group == Group.valueOf(groupName) }
-        ?.apply { active = false }
+        ?.apply { useVoucher() }
+  }
+
+  @Synchronized private fun Voucher.useVoucher() {
+    active = false
   }
 
   fun add(voucher: Voucher) {

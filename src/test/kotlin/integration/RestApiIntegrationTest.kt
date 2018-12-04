@@ -2,15 +2,16 @@ package integration
 
 import com.google.common.truth.Truth.assertThat
 import com.sap.voucher.storage.service.Application
+import com.sap.voucher.storage.service.model.Group
 import io.restassured.RestAssured
 import io.restassured.RestAssured.get
 import io.restassured.http.ContentType
+import junitparams.JUnitParamsRunner
+import junitparams.Parameters
+import org.apache.http.HttpStatus
 import org.hamcrest.CoreMatchers.containsString
 import org.junit.BeforeClass
 import org.junit.Test
-import com.sap.voucher.storage.service.model.Group
-import junitparams.JUnitParamsRunner
-import junitparams.Parameters
 import org.junit.runner.RunWith
 
 @RunWith(JUnitParamsRunner::class)
@@ -60,11 +61,11 @@ class RestApiIntegrationTest {
   }
 
   @Test fun shouldInvokeHealthCheck() {
-    get("/health").then().body(containsString("UP")).statusCode(200)
+    get("/health").then().body(containsString("UP")).statusCode(HttpStatus.SC_OK)
   }
 
   @Test fun shouldGetAllVouchers() {
-    get("/voucher").then().statusCode(200)
+    get("/voucher").then().statusCode(HttpStatus.SC_OK)
   }
 
   @Test @Parameters("CLICK10", "CLICK15", "CLICK20")
@@ -87,7 +88,19 @@ class RestApiIntegrationTest {
     assertThat(code).isNotEmpty()
     assertThat(code.substring(0, 7)).isEqualTo(group.toString())
     assertThat(active).isEqualTo(expectedActiveStatus)
-    assertThat(response.statusCode).isEqualTo(200)
+    assertThat(response.statusCode).isEqualTo(HttpStatus.SC_OK)
+  }
+
+  @Test
+  fun shouldNotGetVoucherForInvalidClickGroup() {
+    // given
+    val invalidGroup = "click150"
+
+    // when and then
+    get("/voucher/$invalidGroup")
+        .then()
+        .statusCode(HttpStatus.SC_NO_CONTENT)
+
   }
 
 }
