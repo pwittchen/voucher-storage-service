@@ -1,7 +1,6 @@
 package com.sap.voucher.storage.service
 
-import com.sap.voucher.storage.service.controller.VoucherController
-import com.sap.voucher.storage.service.service.DefaultVoucherService
+import com.sap.voucher.storage.service.configuration.component.DaggerApplicationComponent
 import io.javalin.Javalin
 import io.javalin.JavalinEvent
 import io.javalin.apibuilder.ApiBuilder.get
@@ -10,7 +9,7 @@ import org.slf4j.LoggerFactory
 class Application {
   companion object {
     private val logger = LoggerFactory.getLogger(Application.javaClass)
-    private val controller = VoucherController(DefaultVoucherService())
+    private val component = DaggerApplicationComponent.create()
 
     @JvmStatic
     fun main(args: Array<String>) {
@@ -26,16 +25,16 @@ class Application {
                 executionTimeMs
             )
           }.routes {
-            get("/voucher") { it.json(controller.getAll()) }
+            get("/voucher") { it.json(component.voucherController().getAll()) }
             get("/voucher/:group") {
-              val voucher = controller.getGroup(it.pathParam("group"))
+              val voucher = component.voucherController().getGroup(it.pathParam("group"))
               if (voucher == null) it.status(204)
               else it.json(voucher)
             }
             get("/health") { it.result("UP") }
             get("/") { it.status(403) }
           }
-          .event(JavalinEvent.SERVER_STARTING) { controller.loadVouchers() }
+          .event(JavalinEvent.SERVER_STARTING) { component.voucherController().loadVouchers() }
           .start(7000)
     }
   }
