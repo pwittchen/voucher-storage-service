@@ -9,8 +9,8 @@ function showHelp() {
                 --help      shows help
                 --build     builds container
                 --run       runs container
-                --push      uploads container
-                --pull      downloads container
+                --push      pushes container to docker hub
+                --pull      pulls container from docker hub
                 --remove    removes container
     "
 }
