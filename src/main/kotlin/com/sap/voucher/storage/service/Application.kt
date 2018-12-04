@@ -33,7 +33,7 @@ class Application {
                 if (voucher == null) it.status(HttpStatus.NO_CONTENT_204)
                 else it.json(voucher).status(HttpStatus.OK_200)
               } catch (e: IllegalArgumentException) {
-                it.status(HttpStatus.NO_CONTENT_204)
+                it.status(HttpStatus.BAD_REQUEST_400)
               }
             }
             get("/health") { it.result("UP").status(HttpStatus.OK_200) }

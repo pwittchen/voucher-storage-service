@@ -99,7 +99,7 @@ class RestApiIntegrationTest {
     // when and then
     get("/voucher/$invalidGroup")
         .then()
-        .statusCode(HttpStatus.SC_NO_CONTENT)
+        .statusCode(HttpStatus.SC_BAD_REQUEST)
 
   }
 
