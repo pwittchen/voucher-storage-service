@@ -50,6 +50,19 @@ class DefaultVoucherServiceTest {
     assertThat(voucher?.active).isFalse()
   }
 
+  @Test fun shouldNotGetVoucherFromClickGroupWhenVouchersAreUsed() {
+    // given
+    prepareTestVouchers()
+
+    // when
+    voucherService.get("CLICK10")
+    voucherService.get("CLICK10")
+    val voucher = voucherService.get("CLICK10")
+
+    // then
+    assertThat(voucher).isNull()
+  }
+
   private fun prepareTestVouchers() {
     voucherService.add(Voucher(Group.CLICK10, "code1", true))
     voucherService.add(Voucher(Group.CLICK10, "code2", true))
