@@ -1,6 +1,8 @@
 # voucher-storage-service
 A microservice developed during "Kyma meets CCV2 Hackathon" at SAP Labs in Gliwice, Poland. It is responsible for providing and using promotional vouchers. This app is a small part of a bigger solution developed by the whole team during the hackathon.
 
+**Tech Stack**: JVM, Kotlin, Gradle, Dagger, Javalin, Docker
+
 ## building and running the app
 
 - building app: `./gradlew clean build`
