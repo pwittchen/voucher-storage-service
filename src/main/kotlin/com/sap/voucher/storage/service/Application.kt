@@ -1,6 +1,7 @@
 package com.sap.voucher.storage.service
 
 import com.sap.voucher.storage.service.controller.VoucherController
+import com.sap.voucher.storage.service.service.DefaultVoucherService
 import io.javalin.Javalin
 import io.javalin.JavalinEvent
 import io.javalin.apibuilder.ApiBuilder.get
@@ -9,7 +10,7 @@ import org.slf4j.LoggerFactory
 class Application {
   companion object {
     private val logger = LoggerFactory.getLogger(Application.javaClass)
-    private val controller = VoucherController()
+    private val controller = VoucherController(DefaultVoucherService())
 
     @JvmStatic
     fun main(args: Array<String>) {

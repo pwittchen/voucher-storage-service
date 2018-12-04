@@ -1,11 +1,10 @@
 package com.sap.voucher.storage.service.controller
 
 import com.sap.voucher.storage.service.model.Voucher
-import com.sap.voucher.storage.service.service.DefaultVoucherService
 import com.sap.voucher.storage.service.service.VoucherService
 
-class VoucherController {
-  private val service: VoucherService = DefaultVoucherService()
+class VoucherController(voucherService: VoucherService) {
+  private val service: VoucherService = voucherService
 
   fun loadVouchers() {
     service.loadVouchers()
