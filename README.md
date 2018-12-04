@@ -9,8 +9,9 @@ A microservice developed during "Kyma meets CCV2 Hackathon" at SAP Labs in Gliwi
 
 - building app: `./gradlew clean build`
 - running app: `java -jar build/libs/app-1.0-all.jar`
-- building docker container with app: `./dockerw.sh -b`
-- running docker container with app: `./dockerw.sh -r`
+- building docker container with app: `./dockerw.sh --build`
+- running docker container with app: `./dockerw.sh --run`
+- displaying help for docker wrapper script: `./dockerw.sh --help`
 
 ## tests
 
