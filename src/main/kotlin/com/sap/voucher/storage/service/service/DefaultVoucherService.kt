@@ -3,8 +3,7 @@ package com.sap.voucher.storage.service.service
 import com.sap.voucher.storage.service.model.Group
 import com.sap.voucher.storage.service.model.Voucher
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import java.lang.IllegalArgumentException
+import kotlinx.coroutines.async
 import java.net.URI
 import java.nio.file.FileSystem
 import java.nio.file.FileSystems
@@ -21,7 +20,7 @@ class DefaultVoucherService : VoucherService {
   }
 
   override fun loadVouchers() {
-    GlobalScope.launch {
+    GlobalScope.async {
       loadVouchers("9999-CLICK10.csv", Group.CLICK10)
       loadVouchers("9999-CLICK15.csv", Group.CLICK15)
       loadVouchers("9999-CLICK20.csv", Group.CLICK20)
