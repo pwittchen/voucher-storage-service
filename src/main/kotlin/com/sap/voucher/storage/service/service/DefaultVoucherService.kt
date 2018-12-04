@@ -76,4 +76,12 @@ class DefaultVoucherService : VoucherService {
         .firstOrNull { it.group == Group.valueOf(groupName) }
         ?.apply { active = false }
   }
+
+  fun add(voucher: Voucher) {
+    vouchers.add(voucher)
+  }
+
+  fun clear() {
+    vouchers.clear()
+  }
 }
