@@ -12,6 +12,11 @@ A microservice developed during "Kyma meets CCV2 Hackathon" at SAP Labs in Gliwi
 - building docker container with app: `./dockerw.sh -b`
 - running docker container with app: `./dockerw.sh -r`
 
+## tests
+
+- running unit tests: `./gradlew test`
+- running integration (rest api) tests: `./gradlew test -Dtest.profile=integration`
+
 ## rest api
 
 ```

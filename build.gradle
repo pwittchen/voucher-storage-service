@@ -42,6 +42,14 @@ sourceSets {
   }
 }
 
+test {
+  if (System.properties['test.profile'] != 'integration') {
+    exclude '**/*integration*'
+  } else {
+    exclude '**/*com/*'
+  }
+}
+
 shadowJar {
   baseName = 'app'
   classifier = 'all'

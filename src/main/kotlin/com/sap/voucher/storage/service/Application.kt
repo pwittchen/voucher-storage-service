@@ -28,7 +28,7 @@ class Application {
             get("/voucher") { it.json(component.voucherController().getAll()) }
             get("/voucher/:group") {
               val voucher = component.voucherController().getGroup(it.pathParam("group"))
-              if (voucher == null) it.status(204)
+              if (voucher == null) it.status(200)
               else it.json(voucher)
             }
             get("/health") { it.result("UP") }
