@@ -9,9 +9,6 @@ A microservice developed during "Kyma meets CCV2 Hackathon" at SAP Labs in Gliwi
 
 - building app: `./gradlew clean build`
 - running app: `java -jar build/libs/app-1.0-all.jar`
-- building docker container with app: `./dockerw.sh --build`
-- running docker container with app: `./dockerw.sh --run`
-- displaying help for docker wrapper script: `./dockerw.sh --help`
 
 ## tests
 
@@ -28,6 +25,12 @@ GET localhost:7000/voucher/click20   # gets and deactivates voucher for 20% disc
 GET localhost:7000/health            # gets information about health check
 ```
 
-## docker hub
+## docker
 
-docker image is available at https://hub.docker.com/r/pwittchen/voucher-storage-service/
+- building docker container: `./dockerw.sh --build`
+- running docker container: `./dockerw.sh --run`
+- pushing docker container: `./dockerw.sh --push`
+- pulling docker container: `./dockerw.sh --pull`
+- removing docker container: `./dockerw.sh --remove`
+- displaying help for docker wrapper script: `./dockerw.sh --help`
+- docker image is available at https://hub.docker.com/r/pwittchen/voucher-storage-service/
