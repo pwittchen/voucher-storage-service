@@ -24,10 +24,10 @@ class DefaultVoucherServiceTest {
     val expectedCode = "sample"
 
     // when
-    val sanitizeCode = voucherService.sanitizeCode(dirtyCode)
+    val sanitizedCode = voucherService.sanitizeCode(dirtyCode)
 
     // then
-    assertThat(sanitizeCode).isEqualTo(expectedCode)
+    assertThat(sanitizedCode).isEqualTo(expectedCode)
   }
 
   @Test @Parameters("CLICK10", "CLICK15", "CLICK20")
