@@ -16,3 +16,7 @@ GET localhost:7000/voucher/click10   # gets and deactivates voucher for 10% disc
 GET localhost:7000/voucher/click15   # gets and deactivates voucher for 15% discount
 GET localhost:7000/voucher/click20   # gets and deactivates voucher for 20% discount
 ```
+
+## docker hub
+
+docker image is available at https://hub.docker.com/r/pwittchen/voucher-storage-service/
