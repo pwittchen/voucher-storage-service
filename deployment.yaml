@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: docker.io/wittchen/voucher-storage-service:latest
+          image: docker.io/pwittchen/voucher-storage-service:latest
           ports:
             - containerPort: 7000
 ---
