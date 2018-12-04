@@ -61,7 +61,7 @@ while :; do
             break
             ;;
         -?*)
-            printf 'WARN: Unknown option (ignored)ignored: %s\n' "$1" >&2
+            printf 'WARN: Unknown option (ignored): %s\n' "$1" >&2
             ;;
         *)
             break
