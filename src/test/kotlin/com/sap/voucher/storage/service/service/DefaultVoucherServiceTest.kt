@@ -60,6 +60,17 @@ class DefaultVoucherServiceTest {
     assertThat(voucher).isNull()
   }
 
+  @Test fun shouldGetAllVouchers() {
+    // given
+    prepareTestVouchers()
+
+    // when
+    val vouchers = voucherService.getAll()
+
+    // then
+    assertThat(vouchers.size).isEqualTo(6)
+  }
+
   private fun prepareTestVouchers() {
     voucherService.add(Voucher(Group.CLICK10, "code1", true))
     voucherService.add(Voucher(Group.CLICK10, "code2", true))
