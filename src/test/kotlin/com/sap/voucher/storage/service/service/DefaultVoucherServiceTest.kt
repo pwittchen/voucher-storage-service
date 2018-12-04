@@ -68,15 +68,20 @@ class DefaultVoucherServiceTest {
     val vouchers = voucherService.getAll()
 
     // then
-    assertThat(vouchers.size).isEqualTo(6)
+    assertThat(vouchers.size).isEqualTo(20)
   }
 
   private fun prepareTestVouchers() {
-    voucherService.add(Voucher(Group.CLICK10, "code1", true))
-    voucherService.add(Voucher(Group.CLICK10, "code2", true))
-    voucherService.add(Voucher(Group.CLICK15, "code3", true))
-    voucherService.add(Voucher(Group.CLICK15, "code4", true))
-    voucherService.add(Voucher(Group.CLICK20, "code5", true))
-    voucherService.add(Voucher(Group.CLICK20, "code6", true))
+    for (i in 1..2) {
+      voucherService.add(Voucher(Group.CLICK10, "code$i", true))
+    }
+
+    for (i in 1..8) {
+      voucherService.add(Voucher(Group.CLICK15, "code$i", true))
+    }
+
+    for (i in 1..10) {
+      voucherService.add(Voucher(Group.CLICK20, "code$i", true))
+    }
   }
 }
