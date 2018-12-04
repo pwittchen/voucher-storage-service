@@ -3,9 +3,13 @@ package com.sap.voucher.storage.service.service
 import com.google.common.truth.Truth.assertThat
 import com.sap.voucher.storage.service.model.Group
 import com.sap.voucher.storage.service.model.Voucher
+import junitparams.JUnitParamsRunner
+import junitparams.Parameters
 import org.junit.After
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(JUnitParamsRunner::class)
 class DefaultVoucherServiceTest {
 
   private val voucherService = DefaultVoucherService()
@@ -26,16 +30,9 @@ class DefaultVoucherServiceTest {
     assertThat(sanitizeCode).isEqualTo(expectedCode)
   }
 
-  @Test fun shouldGetVoucherFromClick10Group() {
-    shouldGetVoucherFromClickGroup(Group.CLICK10)
-  }
-
-  @Test fun shouldGetVoucherFromClick15Group() {
-    shouldGetVoucherFromClickGroup(Group.CLICK15)
-  }
-
-  @Test fun shouldGetVoucherFromClick20Group() {
-    shouldGetVoucherFromClickGroup(Group.CLICK20)
+  @Test @Parameters("CLICK10", "CLICK15", "CLICK20")
+  fun shouldGetVoucherFromClickGroup(group: String) {
+    shouldGetVoucherFromClickGroup(Group.valueOf(group))
   }
 
   private fun shouldGetVoucherFromClickGroup(group: Group) {
