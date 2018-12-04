@@ -1,6 +1,6 @@
 package com.sap.voucher.storage.service
 
-import com.sap.voucher.storage.service.configuration.component.DaggerApplicationComponent
+import com.sap.voucher.storage.service.configuration.DaggerApplicationComponent
 import io.javalin.Javalin
 import io.javalin.JavalinEvent
 import io.javalin.apibuilder.ApiBuilder.get

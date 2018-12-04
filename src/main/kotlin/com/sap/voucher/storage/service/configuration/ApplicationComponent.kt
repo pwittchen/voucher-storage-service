@@ -1,6 +1,5 @@
-package com.sap.voucher.storage.service.configuration.component
+package com.sap.voucher.storage.service.configuration
 
-import com.sap.voucher.storage.service.configuration.module.ControllerModule
 import com.sap.voucher.storage.service.controller.VoucherController
 import dagger.Component
 import javax.inject.Singleton

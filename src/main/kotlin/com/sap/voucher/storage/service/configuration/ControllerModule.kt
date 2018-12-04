@@ -1,4 +1,4 @@
-package com.sap.voucher.storage.service.configuration.module
+package com.sap.voucher.storage.service.configuration
 
 import com.sap.voucher.storage.service.service.DefaultVoucherService
 import com.sap.voucher.storage.service.service.VoucherService
