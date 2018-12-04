@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+IMAGE_NAME="pwittchen/voucher-storage-service"
+
 function showHelp() {
     echo "
     ./dockerw.sh (docker wrapper)
@@ -14,23 +16,23 @@ function showHelp() {
 }
 
 function buildDocker() {
-    sudo docker build -t pwittchen/voucher-storage-service .
+    sudo docker build -t $IMAGE_NAME .
 }
 
 function runDocker() {
-   sudo docker run -p 127.0.0.1:7000:7000 -t pwittchen/voucher-storage-service
+   sudo docker run -p 127.0.0.1:7000:7000 -t $IMAGE_NAME
 }
 
 function pushDocker() {
-    sudo docker push pwittchen/voucher-storage-service
+    sudo docker push $IMAGE_NAME
 }
 
 function pullDocker() {
-    sudo docker pull pwittchen/voucher-storage-service
+    sudo docker pull $IMAGE_NAME
 }
 
 function removeDocker() {
-   sudo docker rmi -f $(sudo docker images | grep "pwittchen/voucher-storage-service" | awk '{print $3}')
+   sudo docker rmi -f $(sudo docker images | grep $IMAGE_NAME | awk '{print $3}')
 }
 
 while :; do
