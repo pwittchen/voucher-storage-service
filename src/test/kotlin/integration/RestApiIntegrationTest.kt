@@ -91,8 +91,7 @@ class RestApiIntegrationTest {
     assertThat(response.statusCode).isEqualTo(HttpStatus.SC_OK)
   }
 
-  @Test
-  fun shouldNotGetVoucherForInvalidClickGroup() {
+  @Test fun shouldNotGetVoucherForInvalidClickGroup() {
     // given
     val invalidGroup = "click150"
 
@@ -100,7 +99,5 @@ class RestApiIntegrationTest {
     get("/voucher/$invalidGroup")
         .then()
         .statusCode(HttpStatus.SC_BAD_REQUEST)
-
   }
-
 }
