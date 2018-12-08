@@ -12,30 +12,15 @@ class Application {
     private val logger = LoggerFactory.getLogger(Application::class.java)
     private val component = DaggerApplicationComponent.create()
 
-    @JvmStatic
-    fun main(args: Array<String>) {
+    @JvmStatic fun main(args: Array<String>) {
       Javalin
           .create()
           .enableCorsForAllOrigins()
-          .requestLogger { context, executionTimeMs ->
-            logger.info(
-                "{} {} {} took {} ms",
-                context.method(),
-                context.path(),
-                context.status(),
-                executionTimeMs
-            )
+          .requestLogger { ctx, executionTime ->
+            logger.info("${ctx.method()} ${ctx.path()} ${ctx.status()} took $executionTime ms")
           }.routes {
-            get("/voucher") { it.json(component.voucherController().getAll()) }
-            get("/voucher/:group") {
-              try {
-                val voucher = component.voucherController().getGroup(it.pathParam("group"))
-                if (voucher == null) it.status(HttpStatus.NO_CONTENT_204)
-                else it.json(voucher).status(HttpStatus.OK_200)
-              } catch (e: IllegalArgumentException) {
-                it.status(HttpStatus.BAD_REQUEST_400)
-              }
-            }
+            get("/voucher") { it.json(component.voucherHttpFacade().getAll()) }
+            get("/voucher/:group") { component.voucherHttpFacade().getGroup(it) }
             get("/health") { it.result("UP").status(HttpStatus.OK_200) }
             get("/") { it.status(HttpStatus.FORBIDDEN_403) }
           }
