@@ -1,6 +1,7 @@
 package com.sap.voucher.storage.service
 
 import com.sap.voucher.storage.service.configuration.DaggerApplicationComponent
+import com.sap.voucher.storage.service.model.Health
 import io.javalin.Javalin
 import io.javalin.JavalinEvent
 import io.javalin.apibuilder.ApiBuilder.get
@@ -21,7 +22,7 @@ class Application {
           }.routes {
             get("/voucher") { component.voucherHttpFacade().getAll(it) }
             get("/voucher/:group") { component.voucherHttpFacade().getGroup(it) }
-            get("/health") { it.result("UP").status(HttpStatus.OK_200) }
+            get("/health") { it.json(Health("UP")).status(HttpStatus.OK_200) }
             get("/") { it.status(HttpStatus.FORBIDDEN_403) }
           }
           .event(JavalinEvent.SERVER_STARTING) { component.voucherController().loadVouchers() }

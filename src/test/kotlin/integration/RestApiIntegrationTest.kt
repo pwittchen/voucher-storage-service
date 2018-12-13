@@ -61,7 +61,17 @@ class RestApiIntegrationTest {
   }
 
   @Test fun shouldInvokeHealthCheck() {
-    get("/health").then().body(containsString("UP")).statusCode(HttpStatus.SC_OK)
+    // given
+    val response = get("/health").then()
+        .contentType(ContentType.JSON)
+        .extract().response()
+
+    // when
+    val status = response.jsonPath().getString("status")
+
+    //then
+    assertThat(status).isEqualTo("UP")
+    assertThat(response.statusCode).isEqualTo(HttpStatus.SC_OK)
   }
 
   @Test fun shouldGetAllVouchers() {
