@@ -1,5 +1,5 @@
 # voucher-storage-service [![Build Status](https://travis-ci.org/pwittchen/voucher-storage-service.svg?branch=master)](https://travis-ci.org/pwittchen/voucher-storage-service)
-A microservice developed during "Kyma meets CCV2 Hackathon" at SAP Labs in Gliwice, Poland. It is responsible for providing and using promotional vouchers. This app is a small part of a bigger solution developed by the whole team during the hackathon.
+A microservice developed during "Kyma meets CCV2 Hackathon" at SAP Labs in Gliwice, Poland. It is responsible for providing and using promotional vouchers. This app is a small part of a bigger solution developed by the whole team during the hackathon. You can also read [related blog post](http://wittchen.io/2018/12/14/kyma-meets-ccv2-hackathon-summary/) about this project and event.
 
 **Tech Stack**
 - application: JVM, Kotlin, Gradle, Dagger, Javalin, Docker
