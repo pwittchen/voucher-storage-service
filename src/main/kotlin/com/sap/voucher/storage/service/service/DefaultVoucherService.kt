@@ -11,8 +11,9 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.HashMap
+import javax.inject.Inject
 
-class DefaultVoucherService : VoucherService {
+class DefaultVoucherService @Inject constructor() : VoucherService {
   private val vouchers: MutableList<Voucher>
 
   init {
